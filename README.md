@@ -7,6 +7,9 @@ Cada Producto estara distribuido segun su categoria, por ejemplo (Placa de video
 por su precio, segun sea de mayor o menor valor.
 Cada producto tendra su descripcion detallando el mismo para facilitar la busqueda.
 
+
+PRIMERA ENTREGA
+
 Listado de Tablas:
 
 Tabla productos:
@@ -28,23 +31,28 @@ Tabla ventas:
 
 SEGUNDA ENTREGA
 
-Para esta entrega del proyecto actualice algunas tablas, les agregue algunos campos y funciones. Realice importancion de datos mediante archivo csv, los dos adjuntos en el repositorio.
+Para esta entrega del proyecto actualice algunas tablas, les agregue algunos campos y funciones. Realice importancion de datos mediante archivo csv, los dos adjuntos en el repositorio. (clientes.csv para la tabla clientes, productos.csv para la tabla productos, categorias para la tabla categorias.)
 El Objetivo de la entrega es incorporar Vistas, Funciones, Stored Procedures y Triggers.
 
 Comenzando por las vistas:
 Incorpore 3 Vistas.
 
-La primera es una Vista de Envios. Esta muestra el Nombre, Apellido y Direccion del cliente. La funcionalidad de esta vista sera entregarla al nuestra distribuidora para que al cliente le llegue su pedido como corresponde.
+La primera es una Vista de Envios. Esta muestra el Nombre, Apellido y Direccion del cliente. La funcionalidad de esta vista sera entregarla a nuestra distribuidora para que al cliente le llegue su pedido como corresponde.
 
-La segunda es una vista de productos de bajo stock. Cuando tengamos menos de 3 productos de stock esta vista nos mostrara el producto que estariamos necesitando para el proximo ingreso a la empresa.
+La segunda es una vista de productos de bajo stock. Cuando tengamos menos de 3 productos de stock esta vista nos mostrara el producto que estariamos necesitando para la proxima reposicion de stock de la empresa.
 
-La tercera es una vista de total de ventas por cliente. Esta vista nos sera util para saber quienes son nuestros clientes mas fieles y proximamente otorgarles descuentos.
+La tercera es una vista de total de ventas por cliente. Esta vista nos sera util para tener mayor control e informacion de que cliente nos compro un producto y cuanto abono.
 
-En las Funciones solo pude integrar una funcion, esta calcula el total de una venta, ingresando el id de la venta, esta automaticamente calculara el total del producto multiplicada su cantidad. (Tuve un problema con las tablas y para que funcione hay que hardcodear un solo valor en la tabla ventas_productos)
+Trabajando con las Funciones pude integrar 2:
+La primer Funcion calcula el total de una venta, toma como parametros los datos de las tablas de ventas y de ventas_productos y los multiplica para tener una mayor precision en la suma total del precio de los productos. Solo debemos Pasarle como parametro en la ejecucion el ID de la venta que queremos sumar.
 
-Pasando con los SP, pude incorporar dos SP para esta entrega.
-El primero sirve para insertar un nuevo producto a la tabla productos. (Aca tambien tuve un problema ya que id_categoria no es AI y hay que hardcodearlo, no se porque no me toma el valor de la tabla categorias)
+La segunda Funcion es un simple buscador de productos, pasandole el ID del producto debe arrojar el nombre de tal producto. (En el Script esta aclarado como deberia funcionar pero no pude resolverlo)
 
-El segundo SP inserta una nueva venta, pasandole el id del cliente y el monto de lo que gasto, ademas genera un nuevo id de venta que me servira mas adelante para hacer una tabla de facturas.
+Pasando con los SP, pude incorporar 3 SP para esta entrega:
+El primero sirve para insertar un nuevo producto a la tabla productos. Solo debemos pasarle como parametros el nombre, su descripcion, el precio al que compramos el producto osea precio_compra, el stock que disponemos y el id de la categoria que pertenece.
 
-Finalizando integre un Trigger que actualiza el stock automaticamente de la tabla venta_productos.
+El segundo SP inserta los productos recien vendidos y su cantidad, para agregar los datos a la tabla debemos pasarle un id de venta, el id del producto y la cantidad.
+
+El tercer SP inserta el proceso final de una venta, para ello debemos pasarle como datos el id del cliente y automaticamente nos generara un id de venta y nos dara el monto total que el cliente debe pagar.
+
+Para finalizar integre un Trigger que actualiza el stock automaticamente de la tabla productos despues de finalizar una venta. Este nos servira como auditoria para tener mayor precision y control en nuestro stock de productos.
