@@ -19,17 +19,15 @@ Con esta Aplicacion resolvemos una problematica que es tener datos limpios, orde
 
 > [!TIP]
 > ### Guia de Creacion de Tablas
-
-* Verificar que las tablas esten en el orden que fueron exportadas.
+> Verificar que las tablas esten en el orden que fueron exportadas.
 
 > [!TIP]
 > ### Guia de Insercion e Importacion de Datos
-
-1. Insertar datos en las tablas **MARCAS** y **PROVEEDORES** (Estan escritos en el SCRIPT solo hay que ejecutarlos).
-2. Importar datos de los archivos .csv adjuntados en la carpeta IMPORTACION.
-    1. Importar en la tabla **CATEGORIAS**.
-    2. Importar en la tabla **PRODUCTOS**.
-    3. Importar en la tabla **CLIENTES**.
+>1. Insertar datos en las tablas **MARCAS** y **PROVEEDORES** (Estan escritos en el SCRIPT solo hay que ejecutarlos).
+>2. Importar datos de los archivos .csv adjuntados en la carpeta IMPORTACION.
+>   1. Importar en la tabla **CATEGORIAS**.
+>   2. Importar en la tabla **PRODUCTOS**.
+>   3. Importar en la tabla **CLIENTES**.
 
 > [!WARNING]
 > Formatear correctamente los campos en las _Importaciones_. En **CATEGORIAS** el nombre, en **PRODUCTOS** el precio_compra y en **CLIENTES** el correo.
@@ -45,30 +43,30 @@ Con esta Aplicacion resolvemos una problematica que es tener datos limpios, orde
 
 #### FUNCIONES
 * calcular_total_venta: Calcula el total de una venta, multiplicando el precio de venta de un producto y su cantidad. (ID del producto, Precio de venta, Cantidad, ID de la venta. Datos obtenidos de las tablas *Productos* y *Ventas_productos*)
-    > [!IMPORTANT]
-    > - Para su funcionamiento se debe ingresar el ID de la venta de la tabla *Ventas_productos*.
+> [!IMPORTANT]
+> Para su funcionamiento se debe ingresar el ID de la venta de la tabla *Ventas_productos*.
 * calcular_total_gastado_cliente: Calcula el total gastado por Cliente. (ID de la venta, ID del producto, ID del cliente, Cantidad, Precio de venta. Datos obtenidos de la tablas *Productos*, *Clientes*, *Ventas* y *Ventas_productos*)
     - Para su funcionamiento se debe ingresar el ID de un cliente.
 
 #### STORED PROCEDURES
 * insertar_venta: Inserta una venta que se le asigna a un Cliente en la tabla *Ventas*
     - Para su Funcionamiento se debe ingresar el ID del cliente al cual se le quiere asignar una venta y el valor total que debe pagar o Null en el caso que se quiera que lo calcule automaticamente.
-    > [!IMPORTANT]
-    > El primer Insert siempre tendra el id del cliente y un total de valor NULL ya que en esa fila se le esta asignando la venta. Al volver a ejecutar el Test podra ver que esta el ID del cliente con el total que debera abonar.
+> [!IMPORTANT]
+> El primer Insert siempre tendra el id del cliente y un total de valor NULL ya que en esa fila se le esta asignando la venta. Al volver a ejecutar el Test podra ver que esta el ID del cliente con el total que debera abonar.
 * insertar_venta_producto: Inserta una venta en la tabla *Ventas_productos*.
-    > [!IMPORTANT]
-    > Para que Funcione este SP debe haber minimo 1 registro en la tabla *Ventas*.
+> [!IMPORTANT]
+> Para que Funcione este SP debe haber minimo 1 registro en la tabla *Ventas*.
     - Para su funcionamiento se debe ingresar el siguiente ID de la venta que sigue en la tabla de **VENTAS** (**EJEMPLO:** Si se ejecuta el SP Ventas se hace un insert que AutoGenera el primer ID, el siguiente paso es ejecutar el SP de Ventas_productos con el ID que seguiria en la tabla ventas, en este caso seria '2', sino dara como resultado en 'total' = 'NULL'), el ID del producto vendido y la cantidad.
 * insertar_factura: Inserta una Factura en la tabla *Facturas*.
     - Para su funcionamiento se debe ingresar el mismo ID que se utilizo en la tabla *Ventas_productos*, la fecha de emision y un metodo de pago.
 * insertar_stock: Inserta Stock a un producto en la tabla *Stock*.
     - Para su funcionamiento de debe ingresar el ID del proveedor del cual compramos el producto, el ID del producto a cual se le quiere sumar el stock, la cantidad que se quiere sumar del producto, la fecha de ingreso y el ID de la marca que en este caso sera la misma que la del proveedor. 
-    > [!TIP]
-    > Utilizar el Test comentado u obtener los datos de la tabla *MARCAS*.
+> [!TIP]
+> Utilizar el Test comentado u obtener los datos de la tabla *MARCAS*.
 * insertar_producto: Inserta un nuevo producto en la tabla *Productos*.
     - Para su funcionamiento se debe ingresar el nombre del producto, su descripcion, el precio de compra, el stock inicial, el ID de su categoria y el ID de su marca.
-    > [!TIP]
-    > Utilizar el Test comentado u obtener los datos de las tablas *CATEGORIAS* y *MARCAS*.
+> [!TIP]
+> Utilizar el Test comentado u obtener los datos de las tablas *CATEGORIAS* y *MARCAS*.
 
 #### TRIGGERS
 * actualizar_stock_venta: Actualiza el Stock despues de una Venta. Al ejecutar una venta Actualiza la tabla *Productos* Restando "X" unidades segun la cantidad que se asigno en la venta. Este actualizara el campo Stock de la tabla *Productos*.
@@ -76,7 +74,6 @@ Con esta Aplicacion resolvemos una problematica que es tener datos limpios, orde
 
 #### HERRAMIENTAS UTILIZADAS
 - MYSQL: Codigo.
-- DRAW.IO: DER.
 - MOCKAROO: Generador de Datos.
 
 ## SEGUNDA ENTREGA
